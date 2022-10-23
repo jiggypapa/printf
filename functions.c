@@ -3,6 +3,7 @@
 /************************* PRINT CHAR *************************/
 
 /**
+
  * print_char - Prints a char
  * @types: List a of arguments
  * @buffer: Buffer array to handle print
@@ -22,6 +23,7 @@ int print_char(va_list types, char buffer[],
 }
 
 /************************* PRINT A STRING *************************/
+
 /**
  * print_string - Prints a string
  * @types: List a of arguments
@@ -50,6 +52,7 @@ int print_string(va_list types, char buffer[],
 		if (precision >= 6)
 			str = "      ";
 	}
+
 	while (str[length] != '\0')
 		length++;
 
@@ -73,6 +76,7 @@ int print_string(va_list types, char buffer[],
 			return (width);
 		}
 	}
+
 	return (write(1, str, length));
 }
 
@@ -121,28 +125,31 @@ int print_int(va_list types, char buffer[],
 	unsigned long int num;
 
 	n = convert_size_number(n, size);
+
 	if (n == 0)
 		buffer[i--] = '0';
-	buffer[BUFF_SIZE - 1] = '\0';
 
+	buffer[BUFF_SIZE - 1] = '\0';
 	num = (unsigned long int)n;
+
 	if (n < 0)
 	{
 		num = (unsigned long int)((-1) * n);
 		is_negative = 1;
 	}
+
 	while (num > 0)
 	{
 		buffer[i--] = (num % 10) + '0';
 		num /= 10;
 	}
-	i++;
-	return (write_number(is_negative, i, buffer, flags, width, precision, size));
 
+	i++;
+
+	return (write_number(is_negative, i, buffer, flags, width, precision, size));
 }
 
 /************************* PRINT BINARY *************************/
-
 /**
  * print_binary - Prints an unsigned number
  * @types: Lista of arguments
@@ -153,7 +160,6 @@ int print_int(va_list types, char buffer[],
  * @size: Size specifier
  * Return: Numbers of char printed.
  */
-
 int print_binary(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -166,6 +172,7 @@ int print_binary(va_list types, char buffer[],
 	UNUSED(width);
 	UNUSED(precision);
 	UNUSED(size);
+
 	n = va_arg(types, unsigned int);
 	m = 2147483648; /* (2 ^ 31) */
 	a[0] = n / m;
@@ -180,6 +187,7 @@ int print_binary(va_list types, char buffer[],
 		if (sum || i == 31)
 		{
 			char z = '0' + a[i];
+
 			write(1, &z, 1);
 			count++;
 		}
